@@ -2,15 +2,14 @@ package com.example.groupsSystem.models.user;
 
 import com.example.groupsSystem.models.group.GroupOfUsers;
 import com.example.groupsSystem.models.post.Post;
-import com.example.groupsSystem.models.post.PrivatePost;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id")
+//@PrimaryKeyJoinColumn(name = "id")
 @EqualsAndHashCode
 public class NormalUser extends User {
 
@@ -19,13 +18,14 @@ public class NormalUser extends User {
     }
 
     public NormalUser(List<GroupOfUsers> groupsThisUserAdminInThere, List<GroupOfUsers> groupsThisUserJoinedInThere) {
-        super();
         this.groupsThisUserAdminInThere = groupsThisUserAdminInThere;
         this.groupsThisUserJoinedInThere = groupsThisUserJoinedInThere;
     }
 
-    public NormalUser(String userName, String password, List<Post> posts, List<GroupOfUsers> groupsThisUserAdminInThere, List<GroupOfUsers> groupsThisUserJoinedInThere) {
-        super(userName, password, posts);
+    public NormalUser(String username, String password, List<Post> posts, List<GroupOfUsers> groupsThisUserAdminInThere, List<GroupOfUsers> groupsThisUserJoinedInThere) {
+        this.username =username ;
+        this.password =password ;
+        this.setPosts(posts);
         this.groupsThisUserAdminInThere = groupsThisUserAdminInThere;
         this.groupsThisUserJoinedInThere = groupsThisUserJoinedInThere;
     }
@@ -35,7 +35,5 @@ public class NormalUser extends User {
 
     @ManyToMany
     private List <GroupOfUsers> groupsThisUserJoinedInThere ;
-
-
 
 }

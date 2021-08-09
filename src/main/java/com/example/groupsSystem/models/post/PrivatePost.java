@@ -29,7 +29,7 @@ public class PrivatePost extends Post{
     public PrivatePost() {
     }
 
-    public PrivatePost(String tittle, String body, User writer, List<Comment> commentList , boolean accepted) {
+    public PrivatePost(String tittle, String body, NormalUser writer, List<Comment> commentList , boolean accepted) {
         super(tittle, body, writer, commentList , accepted);
     }
     public PrivatePost(GroupOfUsers group, NormalUser normalUserAcceptThisPost) {
@@ -37,7 +37,7 @@ public class PrivatePost extends Post{
         this.normalUserAcceptThisPost = normalUserAcceptThisPost;
     }
 
-    public PrivatePost(String tittle, String body, User writer, List<Comment> commentList, GroupOfUsers group, NormalUser normalUserAcceptThisPost , boolean accepted) {
+    public PrivatePost(String tittle, String body, NormalUser writer, List<Comment> commentList, GroupOfUsers group, NormalUser normalUserAcceptThisPost , boolean accepted) {
         super(tittle, body, writer, commentList,accepted);
         this.group = group;
         this.normalUserAcceptThisPost = normalUserAcceptThisPost;

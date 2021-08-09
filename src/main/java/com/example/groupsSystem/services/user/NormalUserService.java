@@ -75,7 +75,7 @@ public class NormalUserService {
     @Autowired
     RequestForPublicPostRepository reqestForPublicPostRepo;
 
-    public void requestForPublicPost(PublicPost publicPost, User writer) {
+    public void requestForPublicPost(PublicPost publicPost, NormalUser writer) {
 
         publicPost.setWriter(writer);
 
@@ -87,7 +87,7 @@ public class NormalUserService {
 
     }
 
-    public void requestForPrivatePostInGroup(PrivatePost privatePost, User writer, GroupOfUsers groupOfUsers) {
+    public void requestForPrivatePostInGroup(PrivatePost privatePost, NormalUser writer, GroupOfUsers groupOfUsers) {
         privatePost.setWriter(writer);
         privatePost.setGroup(groupOfUsers);
         groupOfUsers.getWaitingListForPrivatePosts().add(privatePost);

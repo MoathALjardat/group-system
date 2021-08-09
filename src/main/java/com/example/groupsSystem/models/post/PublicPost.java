@@ -1,6 +1,7 @@
 package com.example.groupsSystem.models.post;
 
 import com.example.groupsSystem.models.comment.Comment;
+import com.example.groupsSystem.models.user.NormalUser;
 import com.example.groupsSystem.models.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ public class PublicPost extends Post {
     public PublicPost() {
     }
 
-    public PublicPost(String tittle, String body, User writer, List<Comment> commentList, boolean accepted) {
+    public PublicPost(String tittle, String body, NormalUser writer, List<Comment> commentList, boolean accepted) {
         super(tittle, body, writer, commentList , accepted);
     }
 

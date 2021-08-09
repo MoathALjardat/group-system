@@ -4,11 +4,11 @@ import com.example.groupsSystem.models.post.PublicPost;
 import com.example.groupsSystem.models.user.NormalUser;
 import com.example.groupsSystem.services.user.NormalUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 
 @Controller
@@ -25,9 +25,11 @@ public class NormalUserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<NormalUser> findAllNormalUsers() {
         return service.getNormalUsers();
     }
+
 
     @GetMapping("/{id}")
     public NormalUser findNormalUserById(@PathVariable int id) {

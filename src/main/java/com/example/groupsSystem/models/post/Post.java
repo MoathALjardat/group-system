@@ -1,6 +1,7 @@
 package com.example.groupsSystem.models.post;
 
 import com.example.groupsSystem.models.comment.Comment;
+import com.example.groupsSystem.models.user.NormalUser;
 import com.example.groupsSystem.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public abstract class Post {
     public Post() {
     }
 
-    public Post(String tittle, String body, User writer, List<Comment> commentList , boolean accepted) {
+    public Post(String tittle, String body, NormalUser writer, List<Comment> commentList , boolean accepted) {
         this.tittle = tittle;
         this.body = body;
         this.writer = writer;
@@ -36,7 +37,7 @@ public abstract class Post {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
-    private User writer;
+    private NormalUser writer;
 
     @OneToMany
     @JsonIgnore

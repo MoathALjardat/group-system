@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 public class PrivatePostController {
 
-
     @Autowired
     private PrivatePostService service;
 
