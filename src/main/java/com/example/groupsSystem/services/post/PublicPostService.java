@@ -1,5 +1,6 @@
 package com.example.groupsSystem.services.post;
 
+import com.example.groupsSystem.models.Type;
 import com.example.groupsSystem.models.post.PublicPost;
 import com.example.groupsSystem.repositories.post.PublicPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class PublicPostService {
     }
 
     public PublicPost addPublicPost(PublicPost publicPost) {
+        if(publicPost.getType()== Type.PUBLIC)
         return publicPostRepository.save(publicPost);
     }
 

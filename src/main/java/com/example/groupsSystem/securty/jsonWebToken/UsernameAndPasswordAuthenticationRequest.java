@@ -1,4 +1,4 @@
-package com.example.groupsSystem.jwt;
+package com.example.groupsSystem.securty.jsonWebToken;
 
 
 import lombok.Getter;

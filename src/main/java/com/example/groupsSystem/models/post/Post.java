@@ -1,8 +1,8 @@
 package com.example.groupsSystem.models.post;
 
+import com.example.groupsSystem.models.Type;
 import com.example.groupsSystem.models.comment.Comment;
 import com.example.groupsSystem.models.user.NormalUser;
-import com.example.groupsSystem.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,28 +20,32 @@ public abstract class Post {
     public Post() {
     }
 
-    public Post(String tittle, String body, NormalUser writer, List<Comment> commentList , boolean accepted) {
+    public Post(String tittle, String body, NormalUser writer, List<Comment> commentList, boolean accepted) {
         this.tittle = tittle;
         this.body = body;
         this.writer = writer;
         this.commentList = commentList;
-        this.accepted = accepted ;
+        this.accepted = accepted;
     }
 
     @Id
     @GeneratedValue
-    private int id ;
+    private int id;
 
-    private String tittle ;
-    private String body ;
+    private Type type;
+
+    private String tittle;
+    private String body;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id" )
     private NormalUser writer;
 
-    @OneToMany
+    @OneToMany(
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Comment> commentList ;
+    private List<Comment> commentList;
 
-    private boolean accepted ;
+    private boolean accepted;
 }

@@ -1,16 +1,15 @@
 package com.example.groupsSystem.securty;
 
 import com.google.common.collect.Sets;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.example.groupsSystem.securty.AppUserPermission.*;
+import static com.example.groupsSystem.securty.ApplicationUserPermission.*;
 import static com.google.common.collect.Sets.*;
 
-public enum AppUserRole {
+public enum ApplicationUserRole {
 
     NORMAL(newHashSet(
             NORMAL_READ_NORMAL,
@@ -36,16 +35,18 @@ public enum AppUserRole {
             NORMAL_WRITE_PRIVATE_POST,
             ADMIN_ACCEPT_GROUP,
             ADMIN_ACCCEPT_PUBLIC_POST,
-            ADMIN_WRITE_NORMAL));
+            ADMIN_WRITE_NORMAL ,
+            ADMIN_READ_NORMALS
+    ));
 
 
-    private final Set<AppUserPermission> permissions;
+    private final Set<ApplicationUserPermission> permissions;
 
-    AppUserRole(Set<AppUserPermission> permissions) {
+    ApplicationUserRole(Set<ApplicationUserPermission> permissions) {
         this.permissions = permissions;
     }
 
-    public Set<AppUserPermission> getPermissions() {
+    public Set<ApplicationUserPermission> getPermissions() {
         return permissions;
     }
 

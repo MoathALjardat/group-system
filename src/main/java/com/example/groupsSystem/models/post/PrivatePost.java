@@ -21,11 +21,6 @@ public class PrivatePost extends Post{
     @JoinColumn
     private GroupOfUsers group ;
 
-
-    @ManyToOne
-    @JoinColumn
-    private NormalUser normalUserAcceptThisPost ;
-
     public PrivatePost() {
     }
 
@@ -42,6 +37,4 @@ public class PrivatePost extends Post{
         this.group = group;
         this.normalUserAcceptThisPost = normalUserAcceptThisPost;
     }
-
-
 }

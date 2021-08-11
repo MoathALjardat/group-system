@@ -16,7 +16,6 @@ import java.util.List;
 @Getter
 
 @Entity
-
 public class GroupOfUsers {
 
     @Id
@@ -26,25 +25,39 @@ public class GroupOfUsers {
     private boolean accepted;
 
 
-    @ManyToMany
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     @JsonIgnore
     private List<NormalUser> users;
 
-    @OneToMany
+    @OneToMany(
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+
     @JsonIgnore
     private List<PrivatePost> privatePosts;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL)
     @JoinColumn
     private NormalUser groupAdmin;
 
-    @ManyToMany
-    @JsonIgnore
-    private List <User> waitingListForJoin;
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })    @JsonIgnore
+    private List<User> waitingListForJoin;
 
-    @ManyToMany
-    @JsonIgnore
-    private List <PrivatePost> waitingListForPrivatePosts;
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })    @JsonIgnore
+    private List<PrivatePost> waitingListForPrivatePosts;
 
     public GroupOfUsers(boolean accepted, List<NormalUser> users, List<PrivatePost> privatePosts, NormalUser groupAdmin) {
         this.accepted = accepted;

@@ -54,7 +54,11 @@ public class AdminUserService {
     RequestForCreateGroupRepository requestForCreateGroupRepo ;
     @Autowired
     GroupRepository groupRepository ;
-    public void acceptGroup(RequestForCreateGroup requestToCreateGroup) {
+    public void acceptGroup(int  requestToCreateGroupId) {
+        RequestForCreateGroup requestToCreateGroup = requestForCreateGroupRepo.findById(requestToCreateGroupId).orElse(null);
+        if (requestToCreateGroup == null)
+            return ;
+
 
         GroupOfUsers groupOfUsers = requestToCreateGroup.getGroupOfUsers();
         groupOfUsers.setAccepted(true);
@@ -70,11 +74,15 @@ public class AdminUserService {
     RequestForPublicPostRepository reqestForPublicPostRepo ;
     @Autowired
     PublicPostRepository publicPostRepository ;
-    public void acceptPublicPost(RequestForPublicPost requestsForPublicPostFromManger) {
+    public void acceptPublicPost(int requestsForPublicPostFromMangerId) {
 
-        PublicPost publicPost = requestsForPublicPostFromManger.getPublicPost();
+        RequestForPublicPost requestForPublicPost = reqestForPublicPostRepo.findById(requestsForPublicPostFromMangerId).orElse(null);
+        if (requestForPublicPost == null)
+            return ;
+
+        PublicPost publicPost = requestForPublicPost.getPublicPost();
         publicPost.setAccepted(true);
-        reqestForPublicPostRepo.deleteById(requestsForPublicPostFromManger.getId());
+        reqestForPublicPostRepo.deleteById(requestForPublicPost.getId());
         publicPostRepository.save(publicPost);
     }
 }

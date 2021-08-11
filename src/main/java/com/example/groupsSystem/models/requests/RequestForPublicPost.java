@@ -1,6 +1,5 @@
 package com.example.groupsSystem.models.requests;
 
-import com.example.groupsSystem.models.post.Post;
 import com.example.groupsSystem.models.post.PublicPost;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,13 +11,13 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-
 public class RequestForPublicPost {
     @Id
     @GeneratedValue
     int id ;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL)
     @JoinColumn
-    PublicPost publicPost  ;
+    PublicPost publicPost;
 }

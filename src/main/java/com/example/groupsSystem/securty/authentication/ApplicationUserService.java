@@ -1,4 +1,4 @@
-package com.example.groupsSystem.securty.auth;
+package com.example.groupsSystem.securty.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,12 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AppUserService implements UserDetailsService {
+public class ApplicationUserService implements UserDetailsService {
 
-    private final  AppUserDao appUserDao ;
+    private final ApplicationUserDao appUserDao ;
 
     @Autowired
-    public AppUserService (@Qualifier("fake") AppUserDao appUserDao) {
+    public ApplicationUserService(@Qualifier("fake") ApplicationUserDao appUserDao) {
         this.appUserDao = appUserDao;
     }
 

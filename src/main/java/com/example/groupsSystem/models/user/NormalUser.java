@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-//@PrimaryKeyJoinColumn(name = "id")
 @EqualsAndHashCode
 public class NormalUser extends User {
 
@@ -30,10 +29,15 @@ public class NormalUser extends User {
         this.groupsThisUserJoinedInThere = groupsThisUserJoinedInThere;
     }
 
-    @OneToMany
+    @OneToMany(
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List <GroupOfUsers> groupsThisUserAdminInThere ;
 
-    @ManyToMany
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     private List <GroupOfUsers> groupsThisUserJoinedInThere ;
-
 }

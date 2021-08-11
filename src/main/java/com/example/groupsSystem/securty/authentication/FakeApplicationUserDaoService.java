@@ -1,4 +1,4 @@
-package com.example.groupsSystem.securty.auth;
+package com.example.groupsSystem.securty.authentication;
 
 import com.example.groupsSystem.models.user.NormalUser;
 import com.example.groupsSystem.models.user.User;
@@ -11,46 +11,46 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.groupsSystem.securty.AppUserRole.ADMIN;
-import static com.example.groupsSystem.securty.AppUserRole.NORMAL;
+import static com.example.groupsSystem.securty.ApplicationUserRole.ADMIN;
+import static com.example.groupsSystem.securty.ApplicationUserRole.NORMAL;
 
 @Repository("fake")
-public class FakeAppUserDaoService implements AppUserDao {
+public class FakeApplicationUserDaoService implements ApplicationUserDao {
     private final PasswordEncoder passwordEncoder;
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    public FakeAppUserDaoService(PasswordEncoder passwordEncoder) {
+    public FakeApplicationUserDaoService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Optional<AppUser> selectAppUserByUsername(String username) {
+    public Optional<ApplicationUser> selectAppUserByUsername(String username) {
         return getAppUsers()
                 .stream()
                 .filter(appUser -> username.equals(appUser.getUsername()))
                 .findFirst();
     }
 
-    private List<AppUser> getAppUsers() {
+    private List<ApplicationUser> getAppUsers() {
 
         List<User> users = userRepository.findAll();
 
-        List<AppUser> appUsers = Lists.newArrayList(
-                new AppUser(
+        List<ApplicationUser> appUsers = Lists.newArrayList(
+                new ApplicationUser(
                         ADMIN.getGrantedAuthorities(),
                         true, true, true, true,
                         "layth",
                         passwordEncoder.encode("layth")
                 ),
-                new AppUser(
+                new ApplicationUser(
                         NORMAL.getGrantedAuthorities(),
                         true, true, true, true,
                         "ramiz",
                         passwordEncoder.encode("ramiz")
                 ),
-                new AppUser(
+                new ApplicationUser(
                         NORMAL.getGrantedAuthorities(),
                         true, true, true, true,
                         "hamza",
@@ -60,7 +60,7 @@ public class FakeAppUserDaoService implements AppUserDao {
 
         for (User user : users) {
             if (user instanceof NormalUser) {
-                appUsers.add(new AppUser(
+                appUsers.add(new ApplicationUser(
                         NORMAL.getGrantedAuthorities(),
                         true, true, true, true,
                         user.getUsername(),
@@ -69,7 +69,7 @@ public class FakeAppUserDaoService implements AppUserDao {
                 ));
             } else {
                 appUsers.add(
-                        new AppUser(
+                        new ApplicationUser(
                                 ADMIN.getGrantedAuthorities(),
                                 true, true, true, true,
                                 user.getUsername(),

@@ -1,4 +1,4 @@
-package com.example.groupsSystem.securty.auth;
+package com.example.groupsSystem.securty.authentication;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Set;
 
 
-public class AppUser implements UserDetails {
+public class ApplicationUser implements UserDetails {
 
     public Set<? extends GrantedAuthority> grantedAuthorities;
 
@@ -19,13 +19,13 @@ public class AppUser implements UserDetails {
     public boolean isCredentialsNonExpired;
     public boolean isEnabled;
 
-    public AppUser(Set<? extends GrantedAuthority> grantedAuthorities,
-                   boolean isAccountNonExpired,
-                   boolean isAccountNonLocked,
-                   boolean isCredentialsNonExpired,
-                   boolean isEnabled,
-                   String username,
-                   String password) {
+    public ApplicationUser(Set<? extends GrantedAuthority> grantedAuthorities,
+                           boolean isAccountNonExpired,
+                           boolean isAccountNonLocked,
+                           boolean isCredentialsNonExpired,
+                           boolean isEnabled,
+                           String username,
+                           String password) {
         this.grantedAuthorities = grantedAuthorities;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
@@ -36,7 +36,7 @@ public class AppUser implements UserDetails {
 
     }
 
-    public AppUser() {
+    public ApplicationUser() {
     }
 
     @Override

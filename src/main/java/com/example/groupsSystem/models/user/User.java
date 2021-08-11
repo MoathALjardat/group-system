@@ -1,7 +1,7 @@
 package com.example.groupsSystem.models.user;
 
 
-import com.example.groupsSystem.securty.auth.AppUser;
+import com.example.groupsSystem.securty.authentication.ApplicationUser;
 import com.example.groupsSystem.models.post.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
@@ -10,15 +10,14 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Setter
 @Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode
-public class User extends AppUser {
+public class User extends ApplicationUser {
 
     public String username;
     public String password;
@@ -27,7 +26,7 @@ public class User extends AppUser {
         super();
     }
 
-    public User(Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, String username, String password, int id, List<Post> posts, String roles) {
+    public User(Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, String username, String password, int id, List<Post> posts, String  roles) {
         super(grantedAuthorities, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, username, password);
         this.id = id;
         this.posts = posts;
@@ -47,7 +46,9 @@ public class User extends AppUser {
     protected int id;
 
 
-    @OneToMany
+    @OneToMany(
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Post> posts;
 

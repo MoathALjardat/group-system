@@ -19,11 +19,13 @@ public class RequestForCreateGroup {
     @GeneratedValue
     int id ;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL)
     @JoinColumn
     private NormalUser groupAdmin;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL)
     @JoinColumn
     private GroupOfUsers groupOfUsers ;
 
